@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+
+</head>
+
+<body class="blue-grey">
+
+    <!-- Working Area -->
+    <div id="app">
+        <div class="row">
+            <div class="col s6 offset-s3">
+                <div class="card-panel">
+                    <div class="row">
+                        <!--div class="col s12 center">
+                            <h4>Titulo del Trabajo</h4>
+                        </div>
+                        <div class="col s8 offset-s2">
+                            <select v-model="persona">
+                                <option v-for="item in personas">{{item}}</option>
+                            </select>
+                        </div>
+                        <div class="col center s12">
+                            <p>{{persona}}</p>
+                        </div-->
+
+                        <div v-for="u in users" class="col s4">
+                            <div class="card-panel center">
+                                <img :src="u.picture.large">
+                                <p>{{u.name.first}}</p>
+                                <p>{{u.name.last}}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- importation of Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- Vue.j -->
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                url: 'https://randomuser.me/api/?results=30', // URL de Axios
+                //personas: ['Fernando', 'Camila', 'Antonia', 'Josefina', 'Diego', 'Pricila'],
+                //persona: '',
+                users: [],
+                estado: true
+            },
+            methods: {
+                async cargar(){
+                    var resultado = await axios.get(this.url);
+                    this.users = resultado.data.results;
+                }
+            },
+            created() {
+                this.cargar();
+            },
+            mounted() {
+                document.addEventListener('DOMContentLoaded', function () {
+                    var elems = document.querySelectorAll('select');
+                    var instances = M.FormSelect.init(elems, {});
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
